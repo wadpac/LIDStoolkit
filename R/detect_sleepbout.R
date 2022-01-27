@@ -64,9 +64,9 @@ detect_sleepbout = function(sleepBinary = c(), wakeBoutThreshold = 0.3,
     }
     bouts$dur = (bouts$end - bouts$start) + 1
     # remove sleep bouts that are either too short or have too much wakefulness and remove the wake bout that follows them
-    shortsleep = which(bouts$state == 1 &
-                         bouts$dur < (sleepBoutMin * (60 / epochSize)) &
-                         bouts$sleepRatio > (1 - wakeBoutThreshold))
+    shortsleep = which(bouts$state == 1 & 
+                         (bouts$dur < (sleepBoutMin * (60 / epochSize)) | 
+                            bouts$sleepRatio < (1 - wakeBoutThreshold)))
     if (length(shortsleep) > 0) {
       bouts = bouts[-c(shortsleep, shortsleep + 1),]
     }
