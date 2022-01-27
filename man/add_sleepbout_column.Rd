@@ -4,12 +4,27 @@
 \alias{add_sleepbout_column}
 \title{add_bouts}
 \usage{
-add_sleepbout_column(ts = c(), epochSize = c())
+add_sleepbout_column(
+  ts = c(),
+  sleepBinary = c(),
+  wakeBoutThreshold = 0.3,
+  wakeBoutMin = 10,
+  sleepBoutMin = 180,
+  epochSize = c()
+)
 }
 \arguments{
 \item{ts}{Time series dataframe produced by GGIR that has column window to indicate wakingup-wakingup window and column class_id, where 0 reflects sleep}
 
-\item{epochSize}{epoch size in seconds}
+\item{sleepBinary}{See \link{detect_sleepbout}}
+
+\item{wakeBoutThreshold}{See \link{detect_sleepbout}}
+
+\item{wakeBoutMin}{See \link{detect_sleepbout}}
+
+\item{sleepBoutMin}{See \link{detect_sleepbout}}
+
+\item{epochSize}{See \link{detect_sleepbout}}
 }
 \value{
 Input data frame expanded with one column to indicate where the sleep bouts occur by a number which reflects the sleep bouw number per window

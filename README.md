@@ -29,7 +29,15 @@ Where ts is the data.frame from step 1, and epochSize is the epoch size in secon
 
 The added `sleepbout` column in ts_new will reflect a number:
 
-- 0: Not a sleep bout.
+- 0: Not a sleep bout, in other words the person was awake.
 - 1: First sleep bout of the corresponding (waking-up to waking-up) window.
 - 2: Second sleep bout of the corresponding  (waking-up to waking-up) window.
 - 3: ... etc. for all subsequent sleep bouts for the corresponding (waking-up to waking-up) window.
+
+Note that all arguments used for the `detect_sleepbout` function can also be passed on to the `add_sleepbout_column` function:
+
+- sleepBinary: Numeric vector with for each epoch in time a 1 for sleep or a 0 for wakefulness
+- wakeBoutThreshold: Number between 0 and 1 being the maximum ratio of wakefulness allowed per 30 minutes
+- wakeBoutMin: Maximum duration of of a wakefulness bout
+- sleepBoutMin: Minimum duration of a sleep bout
+- epochSize: Epoch size in seconds

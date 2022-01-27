@@ -1,6 +1,6 @@
 Package: LIDStoolkit
 Title: Apply LIDS Analysis To Time Series Data
-Description: R package to apply LIDS analysis to time series data
+Description: R package to apply LIDS analysis to time series data.
 Version: 0.0.1
 Date: 2022-02-02
 Authors@R: person(given = "Vincent",
