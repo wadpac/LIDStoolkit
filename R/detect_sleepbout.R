@@ -5,7 +5,9 @@
 #' @param wakeBoutMin Maximum duration of of a wakefulness bout
 #' @param sleepBoutMin Minimum duration of a sleep bout
 #' @param epochSize Epoch size in seconds
-#' @return Data.frame bouts, with for each bout start index, end index, duration, and state being sleep or wake
+#' @return Data.frame bouts, with for each bout start index, end index, duration, state being
+#'  sleep or wake, and sleepRatio being the average ratio of sleep across all of the rolling 
+#'  30 minute windows in a bout
 #' @importFrom zoo rollmean
 #' @export
 # roxygen2::roxygenise()

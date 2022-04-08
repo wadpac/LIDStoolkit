@@ -24,7 +24,9 @@ detect_sleepbout(
 \item{epochSize}{Epoch size in seconds}
 }
 \value{
-Data.frame bouts, with for each bout start index, end index, duration, and state being sleep or wake
+Data.frame bouts, with for each bout start index, end index, duration, state being
+sleep or wake, and sleepRatio being the average ratio of sleep across all of the rolling
+30 minute windows in a bout
 }
 \description{
 detect_sleepbout
