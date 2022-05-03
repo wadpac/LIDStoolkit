@@ -1,16 +1,17 @@
 Package: LIDStoolkit
 Title: Apply LIDS Analysis To Time Series Data
 Description: R package to apply LIDS analysis to time series data.
-Version: 0.0.1
-Date: 2022-02-02
+Version: 0.0.2
+Date: 2022-05-03
 Authors@R: person(given = "Vincent",
            family = "van Hees",
            role = c("aut", "cre"),
            email = "v.vanhees@accelting.com")
 License: Apache License version 2.0 | file LICENSE
-Suggests: rmarkdown, testthat
-Imports: methods, zoo
+Suggests: rmarkdown, testthat, knitr
+Imports: zoo
 Depends: stats, utils, R (>= 3.5.0)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+VignetteBuilder: knitr

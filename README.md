@@ -9,7 +9,6 @@ remotes::install_github("wadpac/LIDStoolkit")
 library("LIDStoolkit")
 ```
 
-
 ## Adding sleep bout indicators to the GGIR time series
 
 ### 1. Load time series output
@@ -37,7 +36,7 @@ The added `sleepbout` column in ts_new will reflect a number:
 Note that all arguments used for the `detect_sleepbout` function can also be passed on to the `add_sleepbout_column` function:
 
 - sleepBinary: Numeric vector with for each epoch in time a 1 for sleep or a 0 for wakefulness
-- wakeBoutThreshold: Number between 0 and 1 being the maximum ratio of wakefulness allowed per 30 minutes
+- wakeBoutThreshold: Number between 0 and 1 being the allowed ratio of wakefulness per sleep bout
 - wakeBoutMin: Maximum duration of of a wakefulness bout
 - sleepBoutMin: Minimum duration of a sleep bout
 - epochSize: Epoch size in seconds

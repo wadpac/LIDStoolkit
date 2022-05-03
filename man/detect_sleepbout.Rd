@@ -15,9 +15,9 @@ detect_sleepbout(
 \arguments{
 \item{sleepBinary}{Numeric vector with for each epoch in time a 1 for sleep or a 0 for wakefulness}
 
-\item{wakeBoutThreshold}{Number between 0 and 1 being the maximum ratio of wakefulness allowed per 30 minutes}
+\item{wakeBoutThreshold}{Number between 0 and 1 being the allowed ratio of wakefulness per sleep bout}
 
-\item{wakeBoutMin}{Maximum duration of of a wakefulness bout}
+\item{wakeBoutMin}{Maximum duration of a wakefulness bout}
 
 \item{sleepBoutMin}{Minimum duration of a sleep bout}
 

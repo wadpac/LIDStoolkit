@@ -1,0 +1,59 @@
+---
+title: "Bout detection"
+author: "Vincent van Hees"
+date: "03 May 2022"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+urlcolor: blue
+vignette: >
+  %\VignetteIndexEntry{Sleep bout detection}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup}
+# Required packages
+library(knitr)
+```
+
+R package LIDStoolkit is currently only available via https://github.com/wadpac/LIDStoolkit) is developed to aid conducting LIDS analysis on sleep estimates.
+
+# detect_sleepbout: Detection of sleep bouts
+
+A sleep bout in the context of LIDS is defined as a sleep episode lasting at least 180. The degree to which wakefulness is allowed is decided based on a function that uses the following input arguments:  
+
+- sleepBinary: Numeric vector with for each epoch in time a 1 for sleep or a 0 for wakefulness.
+- wakeBoutThreshold: Number between 0 and 1 being the allowed ratio of wakefulness per sleep bout. By default this is set to 0.3, which means that per 30 minutes we allow for no more than 9 minutes of wakefulness.
+- wakeBoutMin: Maximum duration of a wakefulness bout. By default this is set to 10 minutes.
+- sleepBoutMin: Minimum duration of a sleep bout. By default this is set to 180 minutes.
+- epochSize: Epoch size in seconds
+
+Next, the code uses the following steps to detect the sleep and successive wake bouts:
+
+1. Segment the time series, where each sequence of either sleep or wakefulness, forms one segment.
+2. Apply 30 minute window rolling mean, which we will call the sleepRatio.
+3. Create table with per row a description of each segment, including: start index, end index, duration, sleep/wake
+4. Identify wakebouts that do not meet wakeBoutMin criteria, and remove them.
+5. Calculate average sleepRatio for the resulting sleep bout.
+6. Remove sleepbout and succeeding wakefulness bout if sleep bout does not meet sleep duration criteria and avrage sleepratio is below (1 - wakeBoutThreshold)
+
+
+Please find below various examples to demonstrate how bouts are detected in synthetic data.
+
+```{R,eval=TRUE}
+library(LIDStoolkit)
+sleepBinary = c(rep(0, 60 * 2),
+                rep(1, 60 * 4),
+                rep(0, 5),
+                rep(1, 60 * 4),
+                rep(0, 60 * 3))
+bouts = detect_sleepbout(sleepBinary = sleepBinary,
+                         wakeBoutThreshold = 0.3,
+                         epochSize = 60)
+plot(sleepBinary, type = "l", main = "sleep classification")
+# detected sleep and wake bouts:
+print(bouts)
+```
