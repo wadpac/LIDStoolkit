@@ -2,7 +2,7 @@
 #'
 #' @param sleepBinary Numeric vector with for each epoch in time a 1 for sleep or a 0 for wakefulness
 #' @param wakeBoutThreshold Number between 0 and 1 being the allowed ratio of wakefulness per sleep bout
-#' @param wakeBoutMin Maximum duration of a wakefulness bout
+#' @param wakeBoutMin Minimum duration of a wakefulness bout (wake shorter than this will be ignored)
 #' @param sleepBoutMin Minimum duration of a sleep bout
 #' @param epochSize Epoch size in seconds
 #' @return Data.frame bouts, with for each bout start index, end index, duration, state being
@@ -59,13 +59,13 @@ detect_sleepbout = function(sleepBinary = c(), wakeBoutThreshold = 0.3,
     bouts$dur = (bouts$end - bouts$start) + 1
     
     for (j in 1:nrow(bouts)) {
-    #   if (length(is.na(sleepRatio[bouts$start[j]:bouts$end[j]]) == TRUE)) {
-    #     bouts$sleepRatio[j] = mean(sleepRatio[bouts$start[j]:bouts$end[j]], na.rm = TRUE)
-    #   } else {
-    #     bouts$sleepRatio[j] = 0
-    #   }
+      #   if (length(is.na(sleepRatio[bouts$start[j]:bouts$end[j]]) == TRUE)) {
+      #     bouts$sleepRatio[j] = mean(sleepRatio[bouts$start[j]:bouts$end[j]], na.rm = TRUE)
+      #   } else {
+      #     bouts$sleepRatio[j] = 0
+      #   }
       # If we would like to use the 30% criteria at bout level then we would use instead
-      bouts$sleepRatio[j] = mean(sleepBinary[(bouts$start[j] + 2):(bouts$end[j]+ 2)], na.rm = TRUE)
+      bouts$sleepRatio[j] = mean(sleepBinary[(bouts$start[j] + 2):(bouts$end[j] + 2)], na.rm = TRUE)
     }
     # remove sleep bouts that are either too short or have too much wakefulness and remove the wake bout that follows them
     shortsleep = which(bouts$state == 1 & 
