@@ -20,7 +20,8 @@ detect_sleepbout = function(sleepBinary = c(), wakeBoutThreshold = 0.3,
   
   sleepBinary = c(1, 0, sleepBinary, rep(0, wakeBoutMin * 10 * (60 / epochSize)), 0, 1)
   # If there are sleep bouts then list these in a data.frame and merge or remove based on criteria
-  if (length(which(sleepBinary == 1)) > (sleepBoutMin) * (60 / epochSize)) { # We are interested in the Bouts with at least sleepBoutMin minutes
+  # if (length(which(sleepBinary == 1)) > (sleepBoutMin) * (60 / epochSize)) { # We are interested in the Bouts with at least sleepBoutMin minutes
+  if (length(which(sleepBinary == 1)) > 0) { # We are interested in the Bouts with at least sleepBoutMin minutes
     changepoints = which(abs(diff(sleepBinary)) == 1) - 2 # where does value change?
     Nbouts = length(changepoints) - 1
     bouts = data.frame(start = numeric(Nbouts), end = numeric(Nbouts), 
