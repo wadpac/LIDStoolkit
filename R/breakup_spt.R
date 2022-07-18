@@ -22,21 +22,25 @@ breakup_spt = function(sleepBinary = c(), tsSPT = c(), wakeBoutThreshold = 0.3,
   if (length(wake_periods) > 0)  {
     sleepBinary[wake_periods] = 0
   }
- 
+  
   # Break up SPT segments when there is too much wake
   wbouts = extract_bouts(sleepBinary)
   wbouts = wbouts[which(wbouts$state == 0),]
-  for (j in 1:nrow(wbouts)) {
-    if (wbouts$dur[j] > maxLengthWake * (60/epochSize)) {
-      tsSPT[wbouts$start[j]:wbouts$end[j]] = 0
+  if (nrow(wbouts) > 0) {
+    for (j in 1:nrow(wbouts)) {
+      if (wbouts$dur[j] > maxLengthWake * (60/epochSize)) {
+        tsSPT[wbouts$start[j]:wbouts$end[j]] = 0
+      }
     }
   }
   # Keep SPT segments longer than sleepBoutMin
   sbouts = extract_bouts(tsSPT)
   sbouts = sbouts[which(sbouts$state == 1),]
-  for (j in 1:nrow(sbouts)) {
-    if (sbouts$dur[j] < sleepBoutMin * (60/epochSize)) {
-      tsSPT[sbouts$start[j]:sbouts$end[j]] = 0
+  if (nrow(sbouts) > 0) {
+    for (j in 1:nrow(sbouts)) {
+      if (sbouts$dur[j] < sleepBoutMin * (60/epochSize)) {
+        tsSPT[sbouts$start[j]:sbouts$end[j]] = 0
+      }
     }
   }
   return(tsSPT)
