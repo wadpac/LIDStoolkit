@@ -10,7 +10,9 @@ add_sleepbout_column(
   wakeBoutThreshold = 0.3,
   wakeBoutMin = 10,
   sleepBoutMin = 180,
-  epochSize = c()
+  epochSize = c(),
+  maxLengthWake = 10,
+  detection.method = 2
 )
 }
 \arguments{
@@ -25,6 +27,10 @@ add_sleepbout_column(
 \item{sleepBoutMin}{See \link{detect_sleepbout}}
 
 \item{epochSize}{See \link{detect_sleepbout}}
+
+\item{maxLengthWake}{See \link{breakup_spt}}
+
+\item{detection.method}{1 for bout detection, 2 for SPT break up}
 }
 \value{
 Input data frame expanded with one column to indicate where the sleep bouts occur by a number which reflects the sleep bouw number per window
